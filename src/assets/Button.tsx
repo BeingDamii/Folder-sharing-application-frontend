@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PrimaryBtn = styled.button`
+export const PrimaryBtn = styled.button`
   display: flex;
   align-items: center;
   background-color: #4200ff;

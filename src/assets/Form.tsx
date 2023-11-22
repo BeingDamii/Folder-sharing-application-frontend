@@ -62,7 +62,7 @@ const Form = () => {
 
 // #region styled-components
 
-const FormWrapper = styled.div`
+export const FormWrapper = styled.div`
   background-color: white;
   width: 100%;
   margin-top: 30px;
