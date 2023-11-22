@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import Logo from "../assets/Logo";
 import AddForm from "../assets/addForm";
+import { FC, useContext } from "react";
+import { NewFolderContext } from "../assets/contexts";
 
-const propTypes = {};
+const AddFilesPage: FC = () => {
+  const NewFolder = useContext(NewFolderContext);
 
-const AddFilesPage = () => {
+  console.log(NewFolder);
+  
   return (
     <PageStyles>
       <Logo />
@@ -13,9 +16,6 @@ const AddFilesPage = () => {
     </PageStyles>
   );
 };
-
-AddFilesPage.propTypes = propTypes;
-// #endregion
 
 const PageStyles = styled.div`
   padding: 50px 150px;
