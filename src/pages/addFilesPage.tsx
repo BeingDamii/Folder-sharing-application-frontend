@@ -4,11 +4,13 @@ import AddForm from "../assets/addForm";
 import { FC, useContext } from "react";
 import { NewFolderContext } from "../assets/contexts";
 
-const AddFilesPage: FC = () => {
-  const NewFolder = useContext(NewFolderContext);
 
-  console.log(NewFolder);
-  
+
+const AddFilesPage: FC = () => {
+  const newFolderContext = useContext(NewFolderContext);
+
+  console.log(newFolderContext);
+
   return (
     <PageStyles>
       <Logo />

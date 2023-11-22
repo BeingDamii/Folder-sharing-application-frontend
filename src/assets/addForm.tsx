@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { FormWrapper } from "./Form";
 import Button from "./Button";
 import { FolderIcon, UploadIcon } from "./icons";
+import { FormWrapper } from "../styles/forms.styled";
 
 const AddForm = () => {
   function saveFolder() {
