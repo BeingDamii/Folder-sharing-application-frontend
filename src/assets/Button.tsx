@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const PrimaryBtn = styled.button`
   display: flex;
   align-items: center;
@@ -10,24 +9,32 @@ export const PrimaryBtn = styled.button`
   padding: 15px;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
   gap: 10px;
   font-weight: bold;
-  cursor: pointer;
+
+  &[disabled] {
+    background-color: #c6c6c6;
+    cursor: not-allowed;
+  }
+
+  :hover {
+    background-color: #3000f0;
+  }
 `;
 
-const Button = () => {
+interface props {
+  clickFn: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  isActive?: boolean;
+  buttonText: string;
+  IconImage?: React.ComponentType<{ component: string }>;
+}
+
+const Button = ({ clickFn, isActive = false, buttonText, IconImage }: props) => {
   return (
-    <PrimaryBtn className="primary-btn">
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 14 14"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
-      </svg>
-      Create Folder
+    <PrimaryBtn onClick={clickFn} disabled={isActive} className="primary-btn">
+      <IconImage component={IconImage} />
+      {buttonText}
     </PrimaryBtn>
   );
 };
