@@ -2,14 +2,11 @@ import styled from "styled-components";
 import Logo from "../assets/Logo";
 import AddForm from "../assets/addForm";
 import { FC, useContext } from "react";
-import { NewFolderContext } from "../assets/contexts";
-
-
+import NewFolderContext from "../assets/contexts";
 
 const AddFilesPage: FC = () => {
-  const newFolderContext = useContext(NewFolderContext);
-
-  console.log(newFolderContext);
+  const { newFolder } = useContext(NewFolderContext);
+  console.log("from add files page", newFolder);
 
   return (
     <PageStyles>

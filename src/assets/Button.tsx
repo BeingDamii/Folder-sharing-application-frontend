@@ -23,17 +23,22 @@ export const PrimaryBtn = styled.button`
   }
 `;
 
-interface props {
+interface Props {
   clickFn: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isActive?: boolean;
   buttonText: string;
-  IconImage?: React.ComponentType<{ component: string }>;
+  IconImage?: React.ComponentType | undefined;
 }
 
-const Button = ({ clickFn, isActive = false, buttonText, IconImage }: props) => {
+const Button = ({
+  clickFn,
+  isActive = false,
+  buttonText,
+  IconImage,
+}: Props) => {
   return (
     <PrimaryBtn onClick={clickFn} disabled={isActive} className="primary-btn">
-      <IconImage component={IconImage} />
+      {IconImage && <IconImage />}
       {buttonText}
     </PrimaryBtn>
   );
