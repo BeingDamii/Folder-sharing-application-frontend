@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Logo from "../assets/Logo";
 import AddForm from "../assets/addForm";
 import { FC, useContext } from "react";
-import NewFolderContext, { NewFolderContextProps, NewFolderProvider } from "../assets/contexts";
+import NewFolderContext, { NewFolderContextProps } from "../assets/contexts";
 
 const AddFilesPage: FC = () => {
-   // Use the useContext hook to access the NewFolderContext
-   const newFolderContext = useContext<NewFolderContextProps | undefined>(
+  // Use the useContext hook to access the NewFolderContext
+  const newFolderContext = useContext<NewFolderContextProps | undefined>(
     NewFolderContext
   );
 
@@ -18,14 +18,14 @@ const AddFilesPage: FC = () => {
   }
 
   const { newFolder } = newFolderContext;
-  
+
   console.log("from add files page", newFolder);
 
   return (
-      <PageStyles>
-        <Logo />
-        <AddForm />
-      </PageStyles>
+    <PageStyles>
+      <Logo />
+      <AddForm />
+    </PageStyles>
   );
 };
 
