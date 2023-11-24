@@ -1,4 +1,10 @@
-import React, { ReactNode, createContext, useState } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 // Create a context for the new folder state
 interface NewFolderState {
@@ -6,16 +12,14 @@ interface NewFolderState {
   selected: string;
 }
 
-const NewFolderContext = createContext<{
+export interface NewFolderContextProps {
   newFolder: NewFolderState;
-  setNewFolder: React.Dispatch<React.SetStateAction<NewFolderState>>;
-}>({
-  newFolder: {
-    folderName: "",
-    selected: "",
-  },
-  setNewFolder: () => {},
-});
+  setNewFolder: Dispatch<SetStateAction<NewFolderState>>;
+}
+
+const NewFolderContext = createContext<NewFolderContextProps | undefined>(
+  undefined
+);
 
 interface NewFolderProviderProps {
   children: ReactNode;
@@ -29,12 +33,8 @@ export const NewFolderProvider: React.FC<NewFolderProviderProps> = ({
     selected: "demo",
   });
 
-  function upDateNewFolder(item){
-    setNewFolder(item)
-  }
-
   return (
-    <NewFolderContext.Provider value={{ newFolder, upDateNewFolder }}>
+    <NewFolderContext.Provider value={{ newFolder, setNewFolder }}>
       {children}
     </NewFolderContext.Provider>
   );

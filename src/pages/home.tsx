@@ -1,7 +1,7 @@
 import Form from "../assets/Form";
 import Logo from "../assets/Logo";
 import { HomeStyled } from "../styles/home.styled";
-import ctaImg from "../assets/cta-img.png"
+import ctaImg from "../assets/cta-img.png";
 
 const Home = () => {
   return (

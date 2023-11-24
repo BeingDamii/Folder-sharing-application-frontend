@@ -2,17 +2,30 @@ import styled from "styled-components";
 import Logo from "../assets/Logo";
 import AddForm from "../assets/addForm";
 import { FC, useContext } from "react";
-import NewFolderContext from "../assets/contexts";
+import NewFolderContext, { NewFolderContextProps, NewFolderProvider } from "../assets/contexts";
 
 const AddFilesPage: FC = () => {
-  const { newFolder } = useContext(NewFolderContext);
+   // Use the useContext hook to access the NewFolderContext
+   const newFolderContext = useContext<NewFolderContextProps | undefined>(
+    NewFolderContext
+  );
+
+  if (!newFolderContext) {
+    // Handle the case where the context is not provided (optional)
+    console.error("NewFolderContext is undefined");
+    // You can provide a default behavior or return null
+    return null;
+  }
+
+  const { newFolder } = newFolderContext;
+  
   console.log("from add files page", newFolder);
 
   return (
-    <PageStyles>
-      <Logo />
-      <AddForm />
-    </PageStyles>
+      <PageStyles>
+        <Logo />
+        <AddForm />
+      </PageStyles>
   );
 };
 

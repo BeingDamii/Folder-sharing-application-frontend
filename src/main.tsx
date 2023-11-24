@@ -4,15 +4,21 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/home";
 import AddFilesPage from "./pages/addFilesPage";
+import { NewFolderProvider } from "./assets/contexts";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element:<NewFolderProvider><Home /></NewFolderProvider> ,
   },
   {
     path: "/add-files",
-    element: <AddFilesPage />,
+
+    element: (
+      <NewFolderProvider>
+        <AddFilesPage />
+      </NewFolderProvider>
+    ),
   },
 ]);
 

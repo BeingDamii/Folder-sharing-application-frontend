@@ -1,5 +1,5 @@
 import avatarImg from "../assets/avatar-img.png";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import SelectInput from "./selectInput";
 import Button from "./Button";
 import { PlusIcon } from "./icons";
@@ -14,16 +14,21 @@ const Form = () => {
   const [error, setError] = useState<null | string>(null);
   const options: string[] = ["Folder type", "Image folder", "Document folder"];
 
-  const { newFolder, setNewFolder } = useContext(
+  // Use the useContext hook to access the NewFolderContext
+  const newFolderContext = useContext<NewFolderContextProps | undefined>(
     NewFolderContext
-  ) as NewFolderContextProps;
+  );
 
   const navigate = useNavigate();
 
-  // let newSubmission: {
-  //   folderName: string;
-  //   selected: string;
-  // } = { folderName: "demo", selected: "demo" };
+  if (!newFolderContext) {
+    // Handle the case where the context is not provided (optional)
+    console.error("NewFolderContext is undefined");
+    // You can provide a default behavior or return null
+    return null;
+  }
+
+  const { setNewFolder } = newFolderContext;
 
   const handleClick = () => {
     if (!foldername || selected === "Folder type") {
@@ -33,10 +38,7 @@ const Form = () => {
 
     const newSubmission = { folderName: foldername, selected: selected };
 
-    setNewFolder((prevFolder) => ({
-      ...prevFolder,
-      ...newSubmission,
-    }));
+    setNewFolder(newSubmission);
 
     // Clear states after successful submission
     setError("");
@@ -45,10 +47,6 @@ const Form = () => {
 
     navigate("/add-files");
   };
-
-  useEffect(() => {
-    console.log("new folder", newFolder);
-  }, [newFolder]);
 
   return (
     <FormWrapper>
