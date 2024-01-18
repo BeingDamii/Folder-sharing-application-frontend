@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { ChangeEvent, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import React, { ChangeEvent, useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import FileComp from "./fileComp";
 
 interface FileUpload {
   file: File;
@@ -11,14 +12,14 @@ const UploadBtn: React.FC = () => {
   const [fileUploads, setFileUploads] = useState<FileUpload[]>([]);
 
   const handleFileSelect = () => {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
     fileInput.click();
   };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
     if (selectedFiles) {
-      const newFileUploads = Array.from(selectedFiles).map(file => ({
+      const newFileUploads = Array.from(selectedFiles).map((file) => ({
         file,
         progress: 0,
       }));
@@ -30,14 +31,14 @@ const UploadBtn: React.FC = () => {
 
   const uploadFile = async (fileUpload: FileUpload) => {
     const formData = new FormData();
-    formData.append('file', fileUpload.file);
+    formData.append("file", fileUpload.file);
 
     try {
-      const response: AxiosResponse = await axios.post('/upload', formData, {
-        onUploadProgress: progressEvent => {
+      const response: AxiosResponse = await axios.post("/upload", formData, {
+        onUploadProgress: (progressEvent) => {
           const progress = (progressEvent.loaded / progressEvent.total) * 100;
-          setFileUploads(prevFileUploads =>
-            prevFileUploads.map(prevFileUpload =>
+          setFileUploads((prevFileUploads) =>
+            prevFileUploads.map((prevFileUpload) =>
               prevFileUpload === fileUpload
                 ? { ...prevFileUpload, progress }
                 : prevFileUpload
@@ -47,10 +48,10 @@ const UploadBtn: React.FC = () => {
       });
 
       // Handle the response if needed
-      console.log('Upload successful:', response.data);
+      console.log("Upload successful:", response.data);
     } catch (error) {
       // Handle errors if any
-      console.error('Error uploading file:', error);
+      console.error("Error uploading file:", error);
     }
   };
 
@@ -60,13 +61,9 @@ const UploadBtn: React.FC = () => {
 
       {fileUploads.map((fileUpload, index) => (
         <div key={index}>
-          <p>{fileUpload.file.name}</p>
-          <input
-            type="range"
-            value={fileUpload.progress}
-            max="100"
-            readOnly
-            style={{ width: '100%' }}
+          <FileComp
+            progress={fileUpload.progress}
+            fileName={fileUpload.file.name}
           />
         </div>
       ))}
@@ -74,7 +71,7 @@ const UploadBtn: React.FC = () => {
       <input
         type="file"
         id="fileInput"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleFileChange}
         accept=".png, .jpg, .jpeg, .gif"
         multiple
@@ -82,8 +79,6 @@ const UploadBtn: React.FC = () => {
     </UploadBtnWrapper>
   );
 };
-
-
 
 const UploadBtnWrapper = styled.div`
   margin-top: 10px;
