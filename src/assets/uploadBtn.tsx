@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import React, { ChangeEvent, useState } from "react";
-import axios, { AxiosResponse } from "axios";
-import FileComp from "./fileComp";
+import React, { ChangeEvent, useState } from 'react';
+import styled from 'styled-components';
+import axios, { AxiosResponse } from 'axios';
+import FileComp from './fileComp';
 
 interface FileUpload {
   file: File;
@@ -19,7 +19,7 @@ const UploadBtn: React.FC = () => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
     if (selectedFiles) {
-      const newFileUploads = Array.from(selectedFiles).map((file) => ({
+      const newFileUploads: FileUpload[] = Array.from(selectedFiles).map((file) => ({
         file,
         progress: 0,
       }));
@@ -32,11 +32,11 @@ const UploadBtn: React.FC = () => {
   const uploadFile = async (fileUpload: FileUpload) => {
     const formData = new FormData();
     formData.append("file", fileUpload.file);
-
+  
     try {
       const response: AxiosResponse = await axios.post("/upload", formData, {
         onUploadProgress: (progressEvent) => {
-          const progress = (progressEvent.loaded / progressEvent.total) * 100;
+          const progress = (progressEvent.loaded / progressEvent.total!) * 100; // Use optional chaining here
           setFileUploads((prevFileUploads) =>
             prevFileUploads.map((prevFileUpload) =>
               prevFileUpload === fileUpload
@@ -46,7 +46,7 @@ const UploadBtn: React.FC = () => {
           );
         },
       });
-
+  
       // Handle the response if needed
       console.log("Upload successful:", response.data);
     } catch (error) {
@@ -54,6 +54,7 @@ const UploadBtn: React.FC = () => {
       console.error("Error uploading file:", error);
     }
   };
+  
 
   return (
     <UploadBtnWrapper>
@@ -61,6 +62,7 @@ const UploadBtn: React.FC = () => {
 
       {fileUploads.map((fileUpload, index) => (
         <div key={index}>
+          {/* Assume FileComp is a React component with appropriate props */}
           <FileComp
             progress={fileUpload.progress}
             fileName={fileUpload.file.name}

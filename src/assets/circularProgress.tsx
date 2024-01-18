@@ -1,8 +1,11 @@
-import { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const CircularProgress = ({progress}) => {
+interface CircularProgressProps {
+  progress: number;
+}
 
+const CircularProgress: React.FC<CircularProgressProps> = ({ progress }) => {
   return (
     <CircularProgressStyled className="circular-progress" percentage={progress}>
       {progress !== 100 && (
@@ -33,7 +36,7 @@ const CircularProgress = ({progress}) => {
   );
 };
 
-const CircularProgressStyled = styled.div`
+const CircularProgressStyled = styled.div<{ percentage: number }>`
   .percent {
     position: relative;
     width: 30px;
