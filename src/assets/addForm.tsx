@@ -37,7 +37,7 @@ const AddForm = () => {
         {newFolder.selected === "Document folder" &&
           " File size must not exceed 2MB, only word, PDF, or Text formats are allowed."}
       </p>
-      <UploadBtn/>
+      <UploadBtn uploadType={newFolder.selected} />
       <Button
         clickFn={saveFolder}
         IconImage={UploadIcon}
@@ -60,7 +60,7 @@ const AddFormWrapper = styled(FormWrapper)`
   h1 {
     font-size: 22px;
   }
-  .desc{
+  .desc {
     margin-top: 10px;
   }
 `;

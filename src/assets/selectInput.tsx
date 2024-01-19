@@ -50,9 +50,7 @@ interface Props {
   options: string[];
 }
 
-/**
- *
- */
+
 
 const SelectInput = ({ selected, options, setSelected }: Props) => {
   const [showOptions, setShowOptions] = useState(false);

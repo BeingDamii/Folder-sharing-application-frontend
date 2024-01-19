@@ -56,7 +56,6 @@ const FileComp: React.FC<FileCompProps> = ({ progress, fileName }) => {
         <h3 className="file-title">{fileName}</h3>
         <p className="upload-percentage">{progress}%</p>
       </div>
-
       <CircularProgress progress={progress} />
     </FileCompStyled>
   );
